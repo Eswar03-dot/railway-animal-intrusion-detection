@@ -1,0 +1,176 @@
+{
+  "model": "YOLOv8n",
+  "checkpoint": "/kaggle/working/Railway_Animal_Project/models/YOLOv8n/finetuned/weights/best.pt",
+  "pretrained_weights": "yolov8n.pt",
+  "ultralytics": "8.4.173",
+  "gpu": "Tesla T4",
+
+  "project_decision": {
+    "selected_model": "YOLOv8n",
+    "decision": "FINAL",
+    "reason": "YOLOv8n achieved the strongest overall detection performance among the three final candidate models. It achieved the highest precision, recall, F1-score and Accuracy Proxy, while maintaining competitive mAP performance. Recall is particularly important for railway animal intrusion detection because missing an animal is more safety-critical than producing an additional false alarm.",
+    "compared_models": [
+      "YOLOv8n",
+      "YOLOv10n",
+      "YOLO11n"
+    ],
+    "excluded_models": [
+      "YOLOv9"
+    ]
+  },
+
+  "evaluation": {
+    "split": "test (352 images)",
+    "images_evaluated": 352,
+    "annotation_instances": 467,
+    "imgsz": 640,
+    "batch": 16,
+    "seed": 0,
+    "used_for_training": false,
+    "used_for_model_selection": true,
+    "note": "The selected YOLOv8n checkpoint was fine-tuned on the railway animal training dataset and evaluated on the test split. The test results were used as the final performance evidence."
+  },
+
+  "metrics": {
+    "precision": 0.9002,
+    "recall": 0.8587,
+    "f1": 0.8790,
+    "accuracy_proxy": 0.7841,
+    "mAP50": 0.8433,
+    "mAP50_95": 0.6235,
+    "macro_ROC_AUC": 0.9682
+  },
+
+  "fixed_threshold_evaluation": {
+    "confidence_threshold": 0.25,
+    "IoU_threshold": 0.50,
+    "TP": 401,
+    "FP": 44.44,
+    "FN": 66,
+    "precision": 0.9002,
+    "recall": 0.8587,
+    "f1": 0.8790,
+    "accuracy_proxy": 0.7841,
+    "accuracy_note": "Accuracy Proxy = TP / (TP + FP + FN). This is an object-detection metric defined for this project and is not conventional classification accuracy."
+  },
+
+  "training": {
+    "epochs_completed": 50,
+    "epochs_max": 50,
+    "training_wallclock_seconds": 4146.19,
+    "training_time_minutes": 69.10,
+    "stopped_early": false,
+    "optimizer": "AdamW",
+    "image_size": 640,
+    "batch_size": 16,
+    "seed": 0,
+    "device": 0,
+    "amp": true
+  },
+
+  "test_timing": {
+    "test_wallclock_seconds": 15.60,
+    "test_wallclock_minutes": 0.26
+  },
+
+  "comparison_with_final_candidates": {
+    "YOLOv8n": {
+      "precision": 0.9002,
+      "recall": 0.8587,
+      "f1": 0.8790,
+      "accuracy_proxy": 0.7841,
+      "mAP50": 0.8433,
+      "mAP50_95": 0.6235,
+      "macro_ROC_AUC": 0.9682,
+      "training_time_minutes": 69.10,
+      "test_time_seconds": 15.60,
+      "decision": "SELECTED"
+    },
+
+    "YOLOv10n": {
+      "precision": 0.8879,
+      "recall": 0.8526,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313,
+      "mAP50": 0.8533,
+      "mAP50_95": 0.6430,
+      "macro_ROC_AUC": 0.9810,
+      "training_time_minutes": 40.41,
+      "test_time_seconds": 9.37,
+      "parameters": 2267508,
+      "best_pt_size_mb": 5.5,
+      "decision": "NOT_SELECTED"
+    },
+
+    "YOLO11n": {
+      "precision": 0.8879,
+      "recall": 0.8475,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313,
+      "mAP50": 0.8431,
+      "mAP50_95": 0.6480,
+      "macro_ROC_AUC": 0.9818,
+      "training_time_minutes": 34.90,
+      "test_time_seconds": 9.19,
+      "parameters": 2584492,
+      "best_pt_size_mb": 5.22,
+      "decision": "NOT_SELECTED"
+    }
+  },
+
+  "selection_criteria": {
+    "primary": [
+      "Recall",
+      "Precision",
+      "F1-score",
+      "Accuracy Proxy"
+    ],
+    "secondary": [
+      "mAP50",
+      "mAP50-95",
+      "ROC-AUC",
+      "Inference speed",
+      "Model size",
+      "Parameter count"
+    ],
+    "safety_priority": "Recall was given high importance because failure to detect an animal near railway tracks is more critical than an additional false positive."
+  },
+
+  "final_decision": {
+    "selected_model": "YOLOv8n",
+    "status": "FINAL MODEL SELECTED",
+    "reason": [
+      "Highest precision among the three final models: 90.02%",
+      "Highest recall among the three final models: 85.87%",
+      "Highest F1-score: 87.90%",
+      "Highest Accuracy Proxy: 78.41%",
+      "Competitive mAP50: 84.33%",
+      "Strong overall detection performance for the railway animal detection task"
+    ],
+    "deployment_role": "The YOLOv8n fine-tuned model will be used as the animal detection component in the next stage of the railway intrusion detection pipeline."
+  },
+
+  "next_stage": {
+    "description": "Integrate the selected YOLOv8n animal detector into the railway video-processing pipeline.",
+    "planned_pipeline": [
+      "Railway video input",
+      "Animal detection using YOLOv8n",
+      "Railway track/danger-zone detection",
+      "Animal tracking",
+      "Movement and distance analysis",
+      "Animal-specific false alarm filtering",
+      "Risk decision",
+      "Alert generation"
+    ]
+  },
+
+  "caveats": [
+    "The experiment uses a single seed (seed 0), so confidence intervals and run-to-run variance are not available.",
+    "The test set contains 352 images and 467 annotated instances.",
+    "Possible source-image overlap across dataset splits was identified by filename; this was not confirmed by image hashing.",
+    "Training and inference wall-clock times depend on shared GPU workload.",
+    "Accuracy Proxy is project-specific and should not be reported as conventional classification accuracy.",
+    "YOLOv10n and YOLO11n were faster than YOLOv8n, but their overall precision, recall, F1 and Accuracy Proxy were lower.",
+    "YOLOv8n Experiment 2 was also evaluated but was not selected because its overall fixed-threshold performance was lower than the original YOLOv8n result."
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "project": "AI-Based Railway Animal Intrusion Detection with Animal-Specific False Alarm Filtering",
+  "component": "Animal Detection",
+
+  "training_summary": [
+    {
+      "Model": "YOLOv8n",
+      "Epochs Completed": 50,
+      "Precision": 0.9002,
+      "Recall": 0.8587,
+      "F1": 0.8790,
+      "mAP50": 0.8433,
+      "mAP50-95": 0.6235,
+      "Total Training Time (sec)": 4146.19,
+      "Total Training Time (min)": 69.10
+    },
+    {
+      "Model": "YOLOv10n",
+      "Epochs Completed": 50,
+      "Precision": 0.8879,
+      "Recall": 0.8526,
+      "F1": 0.8448,
+      "mAP50": 0.8533,
+      "mAP50-95": 0.6430,
+      "Total Training Time (sec)": 2424.50,
+      "Total Training Time (min)": 40.41
+    },
+    {
+      "Model": "YOLO11n",
+      "Epochs Completed": 50,
+      "Precision": 0.8879,
+      "Recall": 0.8475,
+      "F1": 0.8448,
+      "mAP50": 0.8431,
+      "mAP50-95": 0.6480,
+      "Total Training Time (sec)": 2093.98,
+      "Total Training Time (min)": 34.90
+    }
+  ],
+
+  "final_model_comparison": [
+    {
+      "model": "YOLOv8n",
+      "precision": 0.9002,
+      "recall": 0.8587,
+      "f1": 0.8790,
+      "accuracy_proxy": 0.7841,
+      "mAP50": 0.8433,
+      "mAP50-95": 0.6235,
+      "macro_roc_auc": 0.9682,
+      "test_time_seconds": 15.60,
+      "training_time_minutes": 69.10
+    },
+    {
+      "model": "YOLOv10n",
+      "precision": 0.8879,
+      "recall": 0.8526,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313,
+      "mAP50": 0.8533,
+      "mAP50-95": 0.6430,
+      "macro_roc_auc": 0.9810,
+      "test_time_seconds": 9.37,
+      "training_time_minutes": 40.41,
+      "parameters": 2267508,
+      "GFLOPs": 6.6
+    },
+    {
+      "model": "YOLO11n",
+      "precision": 0.8879,
+      "recall": 0.8475,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313,
+      "mAP50": 0.8431,
+      "mAP50-95": 0.6480,
+      "macro_roc_auc": 0.9818,
+      "test_time_seconds": 9.19,
+      "training_time_minutes": 34.90,
+      "parameters": 2584492,
+      "GFLOPs": 6.4
+    }
+  ],
+
+  "final_test_evaluation": {
+    "selected_model": "YOLOv8n",
+    "test_images": 352,
+    "precision": 0.9002,
+    "recall": 0.8587,
+    "f1": 0.8790,
+    "accuracy_proxy": 0.7841,
+    "mAP50": 0.8433,
+    "mAP50-95": 0.6235,
+    "macro_roc_auc": 0.9682,
+    "test_wall_time_seconds": 15.60,
+    "TP": 401,
+    "FP": 44.44,
+    "FN": 66
+  },
+
+  "experimental_protocol": {
+    "training_images": 5016,
+    "validation_images": 358,
+    "test_images": 352,
+    "test_annotation_instances": 467,
+    "classes": 12,
+    "class_names": [
+      "Bear",
+      "Buffalo",
+      "Camel",
+      "Cat",
+      "Cow",
+      "Deer",
+      "Dog",
+      "Donkey",
+      "Elephant",
+      "Leopard",
+      "Lion",
+      "Tiger"
+    ],
+    "epochs": 50,
+    "image_size": 640,
+    "batch_size": 16,
+    "optimizer": "AdamW",
+    "seed": 0,
+    "deterministic": true,
+    "gpu": "NVIDIA Tesla T4",
+    "device": 0,
+    "workers": 4,
+    "amp": true,
+    "pretrained": true,
+    "confidence_threshold": 0.25,
+    "IoU_threshold": 0.50,
+    "selected_model": "YOLOv8n",
+    "selection_basis": "Overall Precision, Recall, F1-score and Accuracy Proxy"
+  },
+
+  "accuracy_proxy_definition": {
+    "name": "Accuracy Proxy",
+    "formula": "TP / (TP + FP + FN)",
+    "description": "Object-detection evaluation proxy used for this project. It is not conventional classification accuracy."
+  },
+
+  "fixed_threshold_evaluation": {
+    "confidence_threshold": 0.25,
+    "IoU_threshold": 0.50,
+    "matching_method": "Greedy one-to-one IoU matching",
+    "YOLOv8n": {
+      "TP": 401,
+      "FP": 44.44,
+      "FN": 66,
+      "precision": 0.9002,
+      "recall": 0.8587,
+      "f1": 0.8790,
+      "accuracy_proxy": 0.7841
+    },
+    "YOLOv10n": {
+      "TP": 392,
+      "FP": 69,
+      "FN": 75,
+      "precision": 0.8503,
+      "recall": 0.8394,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313
+    },
+    "YOLO11n": {
+      "TP": 392,
+      "FP": 69,
+      "FN": 75,
+      "precision": 0.8503,
+      "recall": 0.8394,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313
+    }
+  },
+
+  "roc_evaluation": {
+    "method": "Image-level one-vs-rest ROC evaluation",
+    "score_method": "Maximum predicted confidence for each class per image",
+    "YOLOv8n_macro_ROC_AUC": 0.9682,
+    "YOLOv10n_macro_ROC_AUC": 0.9810,
+    "YOLO11n_macro_ROC_AUC": 0.9818,
+    "note": "ROC evaluation is image-level and does not directly evaluate bounding-box localization."
+  },
+
+  "selected_model": {
+    "model": "YOLOv8n",
+    "reason": "YOLOv8n achieved the strongest overall Precision, Recall, F1-score and Accuracy Proxy among the three final fine-tuned candidate models.",
+    "precision": 0.9002,
+    "recall": 0.8587,
+    "f1": 0.8790,
+    "accuracy_proxy": 0.7841,
+    "mAP50": 0.8433,
+    "mAP50-95": 0.6235,
+    "macro_roc_auc": 0.9682
+  },
+
+  "additional_experiments": {
+    "YOLOv8n_Experiment_2": {
+      "status": "Not selected",
+      "epochs": 50,
+      "precision": 0.8445,
+      "recall": 0.8373,
+      "f1": 0.8409,
+      "accuracy_proxy": 0.7254,
+      "TP": 391,
+      "FP": 72,
+      "FN": 76,
+      "evaluation_time_seconds": 4.68,
+      "reason_not_selected": "Performance was lower than the original YOLOv8n experiment."
+    },
+    "YOLOv9": {
+      "status": "Excluded",
+      "reason": "YOLOv9 was not included in the final three-model comparison."
+    }
+  },
+
+  "comparison_summary": {
+    "best_precision": "YOLOv8n",
+    "best_recall": "YOLOv8n",
+    "best_f1": "YOLOv8n",
+    "best_accuracy_proxy": "YOLOv8n",
+    "best_mAP50": "YOLOv10n",
+    "best_mAP50_95": "YOLO11n",
+    "best_macro_roc_auc": "YOLO11n",
+    "fastest_test_model": "YOLO11n",
+    "fastest_training_model": "YOLO11n",
+    "lowest_parameter_model": "YOLOv10n"
+  },
+
+  "next_project_stage": {
+    "status": "In Development",
+    "planned_components": [
+      "Animal Detection",
+      "Railway Track Detection",
+      "Animal Tracking",
+      "Animal-to-Track Distance Analysis",
+      "Movement Direction Analysis",
+      "Animal-Specific False Alarm Filtering",
+      "Risk Decision",
+      "Railway Intrusion Alert"
+    ]
+  }
+}

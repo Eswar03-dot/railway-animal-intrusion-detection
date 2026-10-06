@@ -1,0 +1,212 @@
+{
+  "description": "Comparison of three YOLO models fine-tuned from pretrained weights on the Railway Animal Intrusion Detection dataset for animal detection near railway tracks.",
+  "evaluation_set": "test (352 images, 467 annotated instances); fine-tuned best.pt independently evaluated on the test split",
+  "f1_note": "F1 is reported from the project's fixed-threshold evaluation at confidence >= 0.25 and IoU >= 0.50. Ultralytics test precision, recall and mAP metrics are also recorded separately.",
+  "accuracy_proxy_note": "Accuracy Proxy = TP / (TP + FP + FN). This is an object-detection metric defined for this project and must not be interpreted as conventional classification accuracy.",
+  "models": [
+    {
+      "model": "YOLOv8n",
+      "pretrained_weights": "yolov8n.pt",
+      "precision": 0.9002,
+      "recall": 0.8587,
+      "f1_derived_from_P_and_R": 0.8790,
+      "accuracy_proxy": 0.7841,
+      "mAP50": 0.8433,
+      "mAP50_95": 0.6235,
+      "inference_ms_per_image": 44.32,
+      "total_ms_per_image_pre_inf_post": "N/A",
+      "parameters": "N/A",
+      "best_pt_size_mb": "N/A",
+      "peak_gpu_mem_gb": "N/A",
+      "training_time_min": 69.10,
+      "epochs_completed": 50,
+      "epochs_max": 50,
+      "best_epoch": "N/A",
+      "stopped_early": false,
+      "status": "completed",
+      "evaluation_set": "test (352 images)",
+      "test_used": true,
+      "gpu": "Tesla T4",
+      "seed": 0
+    },
+    {
+      "model": "YOLOv10n",
+      "pretrained_weights": "yolov10n.pt",
+      "precision": 0.8879,
+      "recall": 0.8526,
+      "f1_derived_from_P_and_R": 0.8448,
+      "accuracy_proxy": 0.7313,
+      "mAP50": 0.8533,
+      "mAP50_95": 0.6430,
+      "inference_ms_per_image": 26.62,
+      "total_ms_per_image_pre_inf_post": "N/A",
+      "parameters": 2267508,
+      "best_pt_size_mb": 5.5,
+      "peak_gpu_mem_gb": "N/A",
+      "training_time_min": 40.41,
+      "epochs_completed": 50,
+      "epochs_max": 50,
+      "best_epoch": "N/A",
+      "stopped_early": false,
+      "status": "completed",
+      "evaluation_set": "test (352 images)",
+      "test_used": true,
+      "gpu": "Tesla T4",
+      "seed": 0
+    },
+    {
+      "model": "YOLO11n",
+      "pretrained_weights": "yolo11n.pt",
+      "precision": 0.8879,
+      "recall": 0.8475,
+      "f1_derived_from_P_and_R": 0.8448,
+      "accuracy_proxy": 0.7313,
+      "mAP50": 0.8431,
+      "mAP50_95": 0.6480,
+      "inference_ms_per_image": 26.11,
+      "total_ms_per_image_pre_inf_post": "N/A",
+      "parameters": 2584492,
+      "best_pt_size_mb": 5.22,
+      "peak_gpu_mem_gb": "N/A",
+      "training_time_min": 34.90,
+      "epochs_completed": 50,
+      "epochs_max": 50,
+      "best_epoch": "N/A",
+      "stopped_early": false,
+      "status": "completed",
+      "evaluation_set": "test (352 images)",
+      "test_used": true,
+      "gpu": "Tesla T4",
+      "seed": 0
+    }
+  ],
+  "dataset": {
+    "name": "Railway Animal Intrusion Detection Dataset",
+    "classes": 12,
+    "class_names": [
+      "Bear",
+      "Buffalo",
+      "Camel",
+      "Cat",
+      "Cow",
+      "Deer",
+      "Dog",
+      "Donkey",
+      "Elephant",
+      "Leopard",
+      "Lion",
+      "Tiger"
+    ],
+    "training_images": 5016,
+    "validation_images": 358,
+    "test_images": 352,
+    "training_instances": 6921,
+    "validation_instances": 498,
+    "test_instances": 467
+  },
+  "experimental_protocol": {
+    "maximum_epochs": 50,
+    "image_size": 640,
+    "batch_size": 16,
+    "seed": 0,
+    "gpu": "Tesla T4",
+    "pretrained_models": true,
+    "optimizer": "AdamW",
+    "initial_learning_rate": 0.000625,
+    "device": 0,
+    "amp": true,
+    "workers": 4,
+    "close_mosaic": 10,
+    "evaluation_confidence_threshold": 0.25,
+    "evaluation_iou_threshold": 0.50,
+    "ultralytics_version": "8.4.173"
+  },
+  "fixed_threshold_evaluation": {
+    "matching_rule": "Predictions with confidence >= 0.25 are sorted by confidence and greedily matched one-to-one with ground-truth boxes using class-agnostic IoU >= 0.50.",
+    "YOLOv8n": {
+      "TP": 401,
+      "FP": 44.44,
+      "FN": 66,
+      "precision": 0.9002,
+      "recall": 0.8587,
+      "f1": 0.8790,
+      "accuracy_proxy": 0.7841
+    },
+    "YOLOv10n": {
+      "TP": 392,
+      "FP": 69,
+      "FN": 75,
+      "precision": 0.8503,
+      "recall": 0.8394,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313
+    },
+    "YOLO11n": {
+      "TP": 392,
+      "FP": 69,
+      "FN": 75,
+      "precision": 0.8503,
+      "recall": 0.8394,
+      "f1": 0.8448,
+      "accuracy_proxy": 0.7313
+    }
+  },
+  "roc_evaluation": {
+    "method": "Image-level one-vs-rest ROC using the maximum predicted confidence for each class from predictions generated at confidence 0.001.",
+    "YOLOv8n_macro_ROC_AUC": 0.9682,
+    "YOLOv10n_macro_ROC_AUC": 0.9810,
+    "YOLO11n_macro_ROC_AUC": 0.9818
+  },
+  "selected_model": {
+    "model": "YOLOv8n",
+    "reason": "YOLOv8n achieved the strongest overall fixed-threshold precision, recall, F1 and Accuracy Proxy among the three final models. It also provides the strongest recall, which is important for railway animal intrusion detection because missed animal detections are safety-critical.",
+    "precision": 0.9002,
+    "recall": 0.8587,
+    "f1": 0.8790,
+    "accuracy_proxy": 0.7841,
+    "mAP50": 0.8433,
+    "mAP50_95": 0.6235
+  },
+  "comparison_summary": {
+    "best_precision": "YOLOv8n",
+    "best_recall": "YOLOv8n",
+    "best_f1": "YOLOv8n",
+    "best_accuracy_proxy": "YOLOv8n",
+    "best_mAP50": "YOLOv10n",
+    "best_mAP50_95": "YOLO11n",
+    "best_ROC_AUC": "YOLO11n",
+    "fastest_test_time": "YOLO11n",
+    "shortest_training_time": "YOLO11n",
+    "lowest_parameter_count": "YOLOv10n"
+  },
+  "additional_experiments": {
+    "YOLOv8n_Experiment_2": {
+      "status": "completed_not_selected",
+      "training_time_min": 32.61,
+      "precision": 0.9056,
+      "recall": 0.8334,
+      "mAP50": 0.8346,
+      "mAP50_95": 0.6148,
+      "accuracy_proxy": 0.7254,
+      "reason_not_selected": "Experiment 2 produced lower recall, F1 and Accuracy Proxy than the original YOLOv8n result."
+    },
+    "YOLOv9": {
+      "status": "excluded_from_final_comparison",
+      "reason": "YOLOv9 was not included in the final three-model comparison."
+    }
+  },
+  "limitations": [
+    "Single training run per final model using seed 0; no confidence intervals or variance estimates.",
+    "The test set contains 352 images and 467 annotated instances, with some animal classes having relatively few test instances.",
+    "Possible source-image overlap across dataset splits was identified by filename; this was not confirmed by image hashing.",
+    "The same dataset split and experimental protocol were used across the compared models.",
+    "Training wall time depends on shared Kaggle GPU workload.",
+    "Ultralytics precision and recall are threshold-dependent, while the project also reports fixed-threshold metrics at confidence >= 0.25 and IoU >= 0.50.",
+    "Accuracy Proxy is project-specific and should not be reported as conventional classification accuracy."
+  ],
+  "source_files": {
+    "YOLOv8n": "YOLOv8n_finetuned_results.zip",
+    "YOLOv10n": "YOLOv10n_finetuned_results.zip",
+    "YOLO11n": "YOLO11n_finetuned_results.zip"
+  }
+}
